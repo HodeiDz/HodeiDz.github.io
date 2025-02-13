@@ -1,5 +1,11 @@
+
+//! NOT IN USE !!!!
+
 var nextPage;
 var prevPage;
+var nextPageEdited;
+var prevPageEdited;
+var currentPage;
 
 window.onload = function() {                //? VIDEO VARIABLES 
 
@@ -63,6 +69,20 @@ window.onload = function() {                //? VIDEO VARIABLES
         prevPage = '2E.2.html';
         console.log('"2E.3.html"');
     }
+
+    //? Guardar variables en localStorage
+
+    currentPage = window.location.pathname;
+    currentPage = currentPage.replace('/Video%20Media/', '');
+    currentPage = currentPage.replace('.html', '');
+
+    prevPageEdited = prevPage.replace('.html', '');
+
+    nextPageEdited = nextPage.replace('.html', '');
+
+    localStorage.setItem('currentPage', currentPage);
+    localStorage.setItem('prevPage', prevPageEdited);
+    localStorage.setItem('nextPage', nextPageEdited);
 }
 
 document.onkeydown = function(e) {          //? Cambio de paginas con flechas

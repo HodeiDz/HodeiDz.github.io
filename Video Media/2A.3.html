@@ -6,7 +6,7 @@
         <title>ZINEMALDIA 2A.3</title>
         <link rel="icon"   href="../Media/ICO_ZINE_VID.svg">
         <link rel="stylesheet" href="../style.css">
-        <script src="../video.js" defer></script>
+        <script src="../script.js" defer></script>
     </head>
     <body>
         <img src="../Media/Olabide.svg" alt="Logo" class="logo">
@@ -31,54 +31,10 @@
         <div class="container">
             <h1>Lapurketa bikaina</h1>
             <div>
-            <iframe src="https://drive.google.com/file/d/1qDRY4pSxlu5aV9Qtgd3j7Kz0BR2nEBfv/preview" width="640" height="480" allowfullscreen></iframe>
+            <iframe id="video" src="https://drive.google.com/file/d/1qDRY4pSxlu5aV9Qtgd3j7Kz0BR2nEBfv/preview" width="640" height="480" allowfullscreen></iframe>
             </div>
         </div>
     </body>
     
-    <script>
-        document.onkeydown = function(e) {
-            if (e.keyCode == 39) { // ->
-                window.location.href = '2B.1.html'
-            }
-            if (e.keyCode == 37) {  // <-
-                window.location.href = '2A.2.html'
-            } 
-        };
 
-        setInterval(function() {
-            if (localStorage.getItem('fullscreen') === 'true') {
-                console.log('Entering fullscreen');
-                localStorage.removeItem('fullscreen');
-                const iframe = document.getElementById('videoFrame');
-                if (iframe.requestFullscreen) {
-                    iframe.requestFullscreen();
-                } else if (iframe.mozRequestFullScreen) { // Firefox
-                    iframe.mozRequestFullScreen();
-                } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari and Opera
-                    iframe.webkitRequestFullscreen();
-                } else if (iframe.msRequestFullscreen) { // IE/Edge
-                    iframe.msRequestFullscreen();
-                }
-
-                // Play the video
-                const video = iframe.contentWindow.document.querySelector('video');
-                if (video) {
-                    video.play();
-                }
-            } else if (localStorage.getItem('exitFullscreen') === 'true') {
-                console.log('Exiting fullscreen');
-                localStorage.removeItem('exitFullscreen');
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.mozCancelFullScreen) { // Firefox
-                    document.mozCancelFullScreen();
-                } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
-                    document.webkitExitFullscreen();
-                } else if (document.msExitFullscreen) { // IE/Edge
-                    document.msExitFullscreen();
-                }
-            }
-        }, 1000); // Check every 1 second
-    </script>
 </html>
