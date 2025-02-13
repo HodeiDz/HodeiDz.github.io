@@ -98,8 +98,30 @@ body {
 }
 
 .button.selected {
-    background: linear-gradient(0deg, rgb(0, 131, 143), rgb(0, 100, 110));
+    background-color:  rgb(0, 131, 143);
+    /* background-color: #0083FF; */
     transform: scale(1.15);
+    transition: background-color 0.3s ease, transform 0.3s ease, border 0.3s ease;
+}
+
+/* .button.selected:hover {
+    background: gray;
+    background-color: rgb(248, 81, 81);
+    transform: scale(0.9);
+    transition: background-color 0.3s ease, transform 0.3s ease, border 0.3s ease;
+} */
+
+.button.unselected {
+    background-color:  gray;
+    border: none;
+    transform: scale(1);
+    transition: background-color 0.3s ease, transform 0.3s ease, border 0.3s ease;
+}
+
+.button.unselected:hover {
+    background-color: rgb(0, 209, 7);
+    transform: scale(1.15);
+    transition: background-color 0.3s ease, transform 0.3s ease, border 0.3s ease;
 }
 
 .imagebutton {
@@ -135,6 +157,7 @@ body {
     background-color: gray;
     transform: scale(0.9);
     cursor: not-allowed;
+    /* filter: blur(1px); */
 }
 .transparentbutton {
     background-color: transparent;

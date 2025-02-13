@@ -20,8 +20,23 @@
         <h1>Kontrol Panela</h1>
         <div>
             <h2 style="height: 12px; font-size: 17px;">Pantailan</h2>
-            <button class="button" style="background-color: gray;" id="ppt-button" onclick="Displayed('ppt')">Aurkezpena</button>
-            <button class="button" style="background-color: gray;" id="vid-button" onclick="Displayed('vid')">Videoak</button>
+            <button class="button" id="ppt-button" onclick="Displayed('ppt')">Aurkezpena</button>
+            <button class="button" id="vid-button" onclick="Displayed('vid')">Videoak</button>
+        </div>
+
+        <div>
+            <h3>Informazioa</h3>
+            <button class="transparentbutton" onclick="reset('slide')">
+                <img src="Media/restart.svg" alt="restart">
+            </button>
+            
+            <span id="slideid-display" style="font-size: 17px; color: #005FCC;"></span>
+
+            <button class="transparentbutton" onclick="reset('video')">
+                <img src="Media/restart.svg" alt="restart">
+            </button>
+
+            <span id="currentPage-display" style="font-size: 17px; color: #005FCC;"></span>
         </div>
 
         <div>
@@ -34,13 +49,6 @@
             <button class="imagebutton" onclick="next()"> Aurrera
                 <img src="Media/arrow.svg" style="transform: rotate(180deg)" alt="Aurrera"> 
             </button>
-       
-            <h3>Aurkezpen orri zenbakia</h3>
-            <button class="transparentbutton" onclick="reset()">
-                <img src="Media/restart.svg" alt="restart">
-            </button>
-            
-            <span id="slideid-display" style="font-size: 17px; color: #005FCC;"></span>
         </div>
 
         <div>
@@ -63,12 +71,13 @@
 
         const slideid = localStorage.getItem('slideid'); // set the current slide id in span
         document.getElementById('slideid-display').textContent = `Aurkezpen orria: ${slideid}`;
-      
 
-        const selectedOption = localStorage.getItem('selectedOption');
+        document.getElementById('currentPage-display').textContent = `${localStorage.getItem('currentPage')}`;
+      
         localStorage.setItem('Displayed', 'ppt');
 
         document.getElementById('ppt-button').classList.add('selected');
+        document.getElementById('vid-button').classList.add('unselected');
         document.getElementById('vidTitle').style.color = 'gray';
 
         vidFullscreen.classList.add('unabled'); // Pantaila osoa
