@@ -1,5 +1,59 @@
 //_____________FOR_VIDEO_PAGES___________//
 
+function VideoUpdate(videoOption) { // ? Update video page
+  const pages = [
+    '2A.1', '2A.2', '2A.3',
+    '2B.1', '2B.2', '2B.3',
+    '2D.1', '2D.2', '2D.3',
+    '2E.1', '2E.2', '2E.3'
+  ];
+
+  if(!localStorage.getItem('currentPage')){
+    console.log('INFO: current page not, setting to default');
+    localStorage.setItem('currentPage', '2A.1')
+  }
+
+  const currentIndex = pages.indexOf(localStorage.getItem('currentPage')); //! currentIndex = currentPage
+  console.log('DEBUG: Raw Index:' + currentIndex)
+
+  if (currentIndex === -1) {
+    console.log('ERROR/ALERT: Current page not found in pages list');
+    return;
+  }
+
+  const prevPage  = pages[currentIndex - 1];
+  const currentPage = pages[currentIndex];
+  const nextPage = pages[currentIndex + 1];
+
+  
+  console.log('INFO: Pev page: ' + prevPage + ', Current page: ' + currentPage + ', Next page: ' + nextPage);
+  
+
+  if (videoOption === 'prev' && currentIndex > 0) {
+    // const prevPage = pages[currentIndex - 1];
+    localStorage.setItem('currentPage', prevPage); 
+    console.log("SET: currentPage -> " + prevPage);
+
+    localStorage.setItem('prevPage', pages[pages.indexOf(prevPage) -1]);
+    localStorage.setItem('nextPage', pages[pages.indexOf(prevPage) +1]);
+
+  } else if (videoOption === 'next' && currentIndex < pages.length - 1) {
+    // const nextPage = pages[currentIndex + 1];
+    localStorage.setItem('currentPage', nextPage);
+    console.log("SET: currentPage -> " + nextPage);
+
+    localStorage.setItem('prevPage', pages[pages.indexOf(nextPage) -1]); 
+    localStorage.setItem('nextPage', pages[pages.indexOf(nextPage) +1]);
+
+  } else {
+    console.log('ALERT: Cannot add or decrease nº of pages');
+  }
+
+  console.log('INFO: VideoUpdate done!');
+  updateVideoDisplay();
+
+}
+
   if (window.location.pathname.startsWith('/Video%20Media/')) {
     console.log('Video page detected');
         
@@ -186,7 +240,7 @@ setInterval(function() { // ? EXIT FULLSCREEN
       alert("Pasahitza okerra");
     }
   }
-  function checkEnter(event) {
+  function checkEnter(event) { // ? Search for enter key
     if (event.key === "Enter") {
       login();
     }
@@ -197,6 +251,27 @@ setInterval(function() { // ? EXIT FULLSCREEN
   function updateSlideIdDisplay() { // ? acutaliza el slideid en la pantalla 
     const slideid = localStorage.getItem('slideid');
     document.getElementById('slideid-display').textContent = `Aurkezpen orria: ${slideid}`;
+  }
+
+  function updateVideoDisplay() { // ? acutaliza el video en la pantalla
+    if(localStorage.getItem('prevPage') === 'undefined' ){
+
+      document.getElementById('prevPage-display').textContent = `-`;
+      
+    } else {
+      document.getElementById('prevPage-display').textContent = ` ${localStorage.getItem('prevPage')}`;
+    }
+
+    document.getElementById('currentPage-display').textContent = `${localStorage.getItem('currentPage')}`;
+
+    if(localStorage.getItem('nextPage') === 'undefined'){
+
+      document.getElementById('nextPage-display').textContent = `-`;
+      
+    } else {
+      document.getElementById('nextPage-display').textContent = `${localStorage.getItem('nextPage')}`;
+    }
+
   }
 
 
@@ -211,8 +286,11 @@ setInterval(function() { // ? EXIT FULLSCREEN
 
       updateSlideIdDisplay();
 
-    } else {
-      localStorage.setItem('next', 'true');
+    } else if (localStorage.getItem('Displayed') === 'vid') {
+      VideoUpdate('next');
+
+/*     } else {
+      localStorage.setItem('next', 'true'); //! REVISAR IMPORTANTE
       console.log("SET: Next -> true");
 
       setTimeout(() => {
@@ -222,7 +300,9 @@ setInterval(function() { // ? EXIT FULLSCREEN
             console.log('ERROR: No changes recived, reverting changes');
             localStorage.setItem('next', 'false');
           }
-        }, 2500);
+        }, 2500); */
+    } else {
+      console.log('ERROR: Invalid option');
     }
     }
 
@@ -243,6 +323,10 @@ setInterval(function() { // ? EXIT FULLSCREEN
 
       updateSlideIdDisplay();
 
+    } else if (localStorage.getItem('Displayed') === 'vid'){
+      
+      VideoUpdate('prev')
+
     } else {
       localStorage.setItem('prev', 'true');
       console.log("SET: prev -> true");
@@ -261,6 +345,7 @@ setInterval(function() { // ? EXIT FULLSCREEN
     if(option === 'slide'){
       localStorage.setItem('slideid', '1');
       updateSlideIdDisplay();
+      console.log('RESET: slideid -> 1');
     } else if(option === 'vid'){
         resetVideo();
     }
@@ -316,6 +401,13 @@ function Displayed(option) { // elegir que se va a mostrar en la pantalla
       vidButton.classList.remove('selected');
       vidButton.classList.add('unselected');
 
+      document.getElementById('reset1').classList.remove('unabled');
+      document.getElementById('reset2').classList.add('unabled');
+
+      document.getElementById('prevPage-Display').style.color = 'gray'; //! revisar, bueno hacer que uncione jajaj
+      document.getElementById('currentPage-Display').style.color = 'gray';
+      document.getElementById('nextPage-Display').style.color = 'gray';
+      
       localStorage.setItem('Displayed', 'ppt');
       document.getElementById('vidTitle').style.color = 'gray';
 
@@ -331,6 +423,9 @@ function Displayed(option) { // elegir que se va a mostrar en la pantalla
     vidButton.classList.remove('unselected');
     vidButton.classList.add('selected');
 
+    document.getElementById('reset1').classList.add('unabled');
+    document.getElementById('reset2').classList.remove('unabled');
+
     localStorage.setItem('Displayed', 'vid');
     document.getElementById('vidTitle').style.color = 'black';
 
@@ -341,3 +436,5 @@ function Displayed(option) { // elegir que se va a mostrar en la pantalla
 
   }
 }
+
+//By: Hodei Dz for: OLabide Ikastola 

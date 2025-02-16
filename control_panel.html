@@ -16,53 +16,88 @@
         <img src="Media/home.svg" alt="Inico" class="homelogin">
     </a> 
 
-    <div class="container">
+    <div class="container" style="width: fit-content;">  <!-- ! style="width: fit-content;"" -->
         <h1>Kontrol Panela</h1>
-        <div>
-            <h2 style="height: 12px; font-size: 17px;">Pantailan</h2>
-            <button class="button" id="ppt-button" onclick="Displayed('ppt')">Aurkezpena</button>
-            <button class="button" id="vid-button" onclick="Displayed('vid')">Videoak</button>
+
+        <h2 style="height: 12px; font-size: 17px;">Pantailan</h2>
+
+        <div class = "controlbuttons">
+            <div>
+            <button class="circlebutton" id="ppt-button" onclick="Displayed('ppt')"></button>
+            <p style="margin-left: 10px; margin-right: 30px;">Aurkezpena</p>
+            </div>
+
+            <div>
+            <button class="circlebutton" id="vid-button" onclick="Displayed('vid')"></button>
+            <p style="margin-left: 10px; margin-right: 30px;">Videoak</p>
+            </div>
+
         </div>
 
-        <div>
-            <h3>Informazioa</h3>
-            <button class="transparentbutton" onclick="reset('slide')">
-                <img src="Media/restart.svg" alt="restart">
-            </button>
-            
-            <span id="slideid-display" style="font-size: 17px; color: #005FCC;"></span>
+        <h3>Informazioa</h3>
+        
+        <div class="controlbuttons">
+            <div>
+                <button class="transparentbutton" onclick="reset('slide')">
+                    <img id="reset1" src="Media/restart.svg" alt="restart">
+                </button>
+                
+                <span id="slideid-display" style="font-size: 17px; color: #005FCC;"></span>
+            </div> 
 
-            <button class="transparentbutton" onclick="reset('video')">
-                <img src="Media/restart.svg" alt="restart">
-            </button>
+            <div style="display: flex; flex-direction:  row; ">
+                <button class="transparentbutton" onclick="reset('video')">
+                    <img id="reset2" src="Media/restart.svg" alt="restart">
+                </button>
+                <div >
+                    <div>
+                        <span id="prevPage-display" style="font-size: 12px; color: #5084be;"></span>
+                    </div>
 
-            <span id="currentPage-display" style="font-size: 17px; color: #005FCC;"></span>
+                    <div>
+                        <span id="currentPage-display" style="margin-left: 10px; margin-right: 10px; font-size: 17px; color: #005FCC;"></span>
+                    </div>
+
+                    <div>
+                        <span id="nextPage-display" style="font-size: 12px; color: #5084be ;"></span>
+                    </div>
+                    
+                </div>
+
+            </div>
         </div>
 
-        <div>
-            <h2 style="height: 12px; font-size: 17px;">Aurkezpen orriak eta videoak</h2>
+        <h2 style="height: 12px; font-size: 17px;">Aurkezpen orriak eta videoak</h2>
+        
+        <div class="controlbuttons">
+            <div>
+                <button class="imagebutton" onclick="prev()">Atzera
+                    <img src="Media/arrow.svg" alt="Atzera">
+                </button>
+            </div>
 
-            <button class="imagebutton" onclick="prev()">Atzera
-                <img src="Media/arrow.svg" alt="Atzera">
-            </button>
-
-            <button class="imagebutton" onclick="next()"> Aurrera
-                <img src="Media/arrow.svg" style="transform: rotate(180deg)" alt="Aurrera"> 
-            </button>
+            <div>
+                <button class="imagebutton" onclick="next()"> Aurrera
+                    <img src="Media/arrow.svg" style="transform: rotate(180deg)" alt="Aurrera"> 
+                </button>
+            </div>
         </div>
 
-        <div>
-            <h2 id="vidTitle" style="height: 12px; font-size: 17px;">Videoak</h2>
+        <h2 id="vidTitle" style="height: 12px; font-size: 17px;">Videoak</h2>
+
+        <div class="controlbuttons">
             <button id="vidFullscreen" class="imagebutton" onclick="fullscreen()">Pantaila osoa 
                 <img src="Media/fullscreen.svg"  alt="fullscreen">
-            </button>     
+            </button>   
+              
             <button id="vidMinimize" class="imagebutton" onclick="minimize()">Pantaila txikitu 
                 <img src="Media/minimize.svg" alt="fullscreen exit">
             </button>
         </div>
-        <p>funtzionamendu optimoa izateko mesedez Chrome erabili</p>
+        <p>funtzionamendu optimoa izateko Chrome erabili</p>
     </div>
 </body>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         if (!localStorage.getItem('slideid')) {
@@ -72,12 +107,15 @@
         const slideid = localStorage.getItem('slideid'); // set the current slide id in span
         document.getElementById('slideid-display').textContent = `Aurkezpen orria: ${slideid}`;
 
+        document.getElementById('prevPage-display').textContent = `${localStorage.getItem('prevPage')}`;
         document.getElementById('currentPage-display').textContent = `${localStorage.getItem('currentPage')}`;
+        document.getElementById('nextPage-display').textContent = `${localStorage.getItem('nextPage')}`;
       
         localStorage.setItem('Displayed', 'ppt');
 
         document.getElementById('ppt-button').classList.add('selected');
         document.getElementById('vid-button').classList.add('unselected');
+        document.getElementById('reset2').classList.add('unabled');
         document.getElementById('vidTitle').style.color = 'gray';
 
         vidFullscreen.classList.add('unabled'); // Pantaila osoa
