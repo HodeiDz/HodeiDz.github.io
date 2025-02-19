@@ -108,15 +108,23 @@
         document.getElementById('slideid-display').textContent = `Aurkezpen orria: ${slideid}`;
 
         document.getElementById('prevPage-display').textContent = `${localStorage.getItem('prevPage')}`;
-        document.getElementById('currentPage-display').textContent = `${localStorage.getItem('currentPage')}`;
-        document.getElementById('nextPage-display').textContent = `${localStorage.getItem('nextPage')}`;
-      
+        document.getElementById('currentPage-display').textContent = `${localStorage.getItem('prevPage')}`;
+        document.getElementById('nextPage-display').textContent = `${localStorage.getItem('currentPage')}`;
+        
         localStorage.setItem('Displayed', 'ppt');
-
+        
+        const vidSpan = document.getElementById('prevPage-Display', 'currentPage-Display', 'nextPage-Display');
+        
         document.getElementById('ppt-button').classList.add('selected');
         document.getElementById('vid-button').classList.add('unselected');
         document.getElementById('reset2').classList.add('unabled');
+        
         document.getElementById('vidTitle').style.color = 'gray';
+        
+        document.getElementById('prevPage-display').style.color  = 'gray';                               
+        document.getElementById('currentPage-display').style.color  = 'gray';                               
+        document.getElementById('nextPage-display').style.color  = 'gray';                               
+        
 
         vidFullscreen.classList.add('unabled'); // Pantaila osoa
         vidMinimize.classList.add('unabled'); // Pantaila txikitu

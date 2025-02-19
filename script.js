@@ -404,9 +404,11 @@ function Displayed(option) { // elegir que se va a mostrar en la pantalla
       document.getElementById('reset1').classList.remove('unabled');
       document.getElementById('reset2').classList.add('unabled');
 
-      document.getElementById('prevPage-Display').style.color = 'gray'; //! revisar, bueno hacer que uncione jajaj
-      document.getElementById('currentPage-Display').style.color = 'gray';
-      document.getElementById('nextPage-Display').style.color = 'gray';
+      document.getElementById('prevPage-display').style.color = 'gray'; 
+      document.getElementById('currentPage-display').style.color = 'gray';
+      document.getElementById('nextPage-display').style.color = 'gray';
+      
+      document.getElementById('slideid-display').style.color = '#5084be';
       
       localStorage.setItem('Displayed', 'ppt');
       document.getElementById('vidTitle').style.color = 'gray';
@@ -414,25 +416,28 @@ function Displayed(option) { // elegir que se va a mostrar en la pantalla
       vidFullscreen.classList.add('unabled');
       vidMinimize.classList.add('unabled');
 
-      document.getElementById('slideid-display').style.color = '#005FCC';
       
-  } else if (option === 'vid') {
-    pptButton.classList.remove('selected');
-    pptButton.classList.add('unselected');
-
-    vidButton.classList.remove('unselected');
-    vidButton.classList.add('selected');
-
-    document.getElementById('reset1').classList.add('unabled');
-    document.getElementById('reset2').classList.remove('unabled');
-
-    localStorage.setItem('Displayed', 'vid');
-    document.getElementById('vidTitle').style.color = 'black';
-
-    vidFullscreen.classList.remove('unabled');
-    vidMinimize.classList.remove('unabled');
-
-    document.getElementById('slideid-display').style.color = 'gray';
+    } else if (option === 'vid') {
+      pptButton.classList.remove('selected');
+      pptButton.classList.add('unselected');
+      
+      vidButton.classList.remove('unselected');
+      vidButton.classList.add('selected');
+      
+      document.getElementById('reset1').classList.add('unabled');
+      document.getElementById('reset2').classList.remove('unabled');
+      
+      localStorage.setItem('Displayed', 'vid');
+      document.getElementById('vidTitle').style.color = 'black';
+      
+      vidFullscreen.classList.remove('unabled');
+      vidMinimize.classList.remove('unabled');
+      
+      document.getElementById('prevPage-display').style.color  = '#5084be';                               
+      document.getElementById('currentPage-display').style.color  = '#5084be';                               
+      document.getElementById('nextPage-display').style.color  = '#5084be';  
+     
+      document.getElementById('slideid-display').style.color = 'gray';
 
   }
 }
