@@ -65,6 +65,7 @@ function VideoUpdate(videoOption) { // ? Update video page
 
   window.onload = function() {                //? VIDEO VARIABLES 
 
+     //! supuestamente no hace falta
       if (window.location.pathname.endsWith('2A.1.html')) {
           prevPage = null;
           nextPage = '2A.2.html';
@@ -138,7 +139,16 @@ function VideoUpdate(videoOption) { // ? Update video page
 
       localStorage.setItem('currentPage', currentPage);
       localStorage.setItem('prevPage', prevPageEdited);
-      localStorage.setItem('nextPage', nextPageEdited);
+      localStorage.setItem('nextPage', nextPageEdited); 
+
+      setInterval(function() { //! Check changes 
+        if(localStorage.getItem('Displayed') !== 'vid'){
+            window.location.href = 'example.com';   
+            
+        } else {
+            console.log("DEBUG: check runned")
+        }
+      }, 1000);
 }
 
 document.onkeydown = function(e) {          //? Cambio de paginas con flechas
