@@ -107,13 +107,16 @@
         const slideid = localStorage.getItem('slideid'); // set the current slide id in span
         document.getElementById('slideid-display').textContent = `Aurkezpen orria: ${slideid}`;
 
-        document.getElementById('prevPage-display').textContent = `${localStorage.getItem('prevPage')}`;
-        document.getElementById('currentPage-display').textContent = `${localStorage.getItem('prevPage')}`;
-        document.getElementById('nextPage-display').textContent = `${localStorage.getItem('currentPage')}`;
+        if( localStorage.getItem('prevPage') == null){
+            document.getElementById('prevPage-display').textContent = `-`;
+        } else {
+            document.getElementById('prevPage-display').textContent = `${localStorage.getItem('prevPage')}`;
+        }
+
+        document.getElementById('currentPage-display').textContent = `${localStorage.getItem('currentPage')}`;
+        document.getElementById('nextPage-display').textContent = `${localStorage.getItem('nextPage')}`;
         
         localStorage.setItem('Displayed', 'ppt');
-        
-        const vidSpan = document.getElementById('prevPage-Display', 'currentPage-Display', 'nextPage-Display');
         
         document.getElementById('ppt-button').classList.add('selected');
         document.getElementById('vid-button').classList.add('unselected');
@@ -125,9 +128,8 @@
         document.getElementById('currentPage-display').style.color  = 'gray';                               
         document.getElementById('nextPage-display').style.color  = 'gray';                               
         
-
-        vidFullscreen.classList.add('unabled'); // Pantaila osoa
-        vidMinimize.classList.add('unabled'); // Pantaila txikitu
+        document.getElementById('vidFullscreen').classList.add('unabled'); // Pantaila osoa
+        document.getElementById('vidMinimize').classList.add('unabled'); // Pantaila txikitu
         
     });    
 </script>

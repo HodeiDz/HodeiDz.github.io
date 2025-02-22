@@ -253,24 +253,26 @@ setInterval(function() { // ? EXIT FULLSCREEN
     document.getElementById('slideid-display').textContent = `Aurkezpen orria: ${slideid}`;
   }
 
-  function updateVideoDisplay() { // ? acutaliza el video en la pantalla
-    if(localStorage.getItem('prevPage') === 'undefined' ){
-
-      document.getElementById('prevPage-display').textContent = `-`;
+  function updateVideoDisplay(option) { // ? acutaliza el video en la pantalla
+    if(localStorage.getItem('prevPage') === 'undefined' || localStorage.getItem('prevPage') === null) {
       
+      document.getElementById('prevPage-display').textContent = `-`;
     } else {
-      document.getElementById('prevPage-display').textContent = ` ${localStorage.getItem('prevPage')}`;
+      document.getElementById('prevPage-display').textContent = `${localStorage.getItem('prevPage')}`;
     }
 
     document.getElementById('currentPage-display').textContent = `${localStorage.getItem('currentPage')}`;
 
-    if(localStorage.getItem('nextPage') === 'undefined'){
+    if(localStorage.getItem('nextPage') === 'undefined' || localStorage.getItem('nextPage') === null){
 
       document.getElementById('nextPage-display').textContent = `-`;
       
     } else {
       document.getElementById('nextPage-display').textContent = `${localStorage.getItem('nextPage')}`;
     }
+
+    console.log('INFO: updateVideoDisplay runned');
+
 
   }
 
@@ -346,8 +348,11 @@ setInterval(function() { // ? EXIT FULLSCREEN
       localStorage.setItem('slideid', '1');
       updateSlideIdDisplay();
       console.log('RESET: slideid -> 1');
-    } else if(option === 'vid'){
-        resetVideo();
+    } else if(option === 'video'){
+        localStorage.setItem('prevPage', undefined);
+        localStorage.setItem('currentPage', '2A.1');
+        localStorage.setItem('nextPage', '2A.2');
+        updateVideoDisplay();
     }
   }
 
@@ -394,7 +399,7 @@ function Displayed(option) { // elegir que se va a mostrar en la pantalla
   const pptButton = document.getElementById('ppt-button');
   const vidButton = document.getElementById('vid-button');
 
-  if (option === 'ppt') {
+  if (option === 'ppt') { //! Boton de diapositivas
       pptButton.classList.remove('unselected');
       pptButton.classList.add('selected');
 
@@ -408,7 +413,7 @@ function Displayed(option) { // elegir que se va a mostrar en la pantalla
       document.getElementById('currentPage-display').style.color = 'gray';
       document.getElementById('nextPage-display').style.color = 'gray';
       
-      document.getElementById('slideid-display').style.color = '#5084be';
+      document.getElementById('slideid-display').style.color = '#005FCC';
       
       localStorage.setItem('Displayed', 'ppt');
       document.getElementById('vidTitle').style.color = 'gray';
@@ -417,7 +422,7 @@ function Displayed(option) { // elegir que se va a mostrar en la pantalla
       vidMinimize.classList.add('unabled');
 
       
-    } else if (option === 'vid') {
+    } else if (option === 'vid') { //! Boton de video
       pptButton.classList.remove('selected');
       pptButton.classList.add('unselected');
       
@@ -433,8 +438,10 @@ function Displayed(option) { // elegir que se va a mostrar en la pantalla
       vidFullscreen.classList.remove('unabled');
       vidMinimize.classList.remove('unabled');
       
+        // ? habilitar info diapositivas
+
       document.getElementById('prevPage-display').style.color  = '#5084be';                               
-      document.getElementById('currentPage-display').style.color  = '#5084be';                               
+      document.getElementById('currentPage-display').style.color  = '#005FCC';                               
       document.getElementById('nextPage-display').style.color  = '#5084be';  
      
       document.getElementById('slideid-display').style.color = 'gray';
