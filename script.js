@@ -65,6 +65,7 @@ function VideoUpdate(videoOption) { // ? Update video page
 
   window.onload = function() {                //? VIDEO VARIABLES 
 
+     //! supuestamente no hace falta
       if (window.location.pathname.endsWith('2A.1.html')) {
           prevPage = null;
           nextPage = '2A.2.html';
@@ -138,7 +139,16 @@ function VideoUpdate(videoOption) { // ? Update video page
 
       localStorage.setItem('currentPage', currentPage);
       localStorage.setItem('prevPage', prevPageEdited);
-      localStorage.setItem('nextPage', nextPageEdited);
+      localStorage.setItem('nextPage', nextPageEdited); 
+
+      setInterval(function() { //! Check changes 
+        if(localStorage.getItem('Displayed') !== 'vid'){
+            window.location.href = 'example.com';   
+            
+        } else {
+            console.log("DEBUG: check runned")
+        }
+      }, 1000);
 }
 
 document.onkeydown = function(e) {          //? Cambio de paginas con flechas
@@ -253,24 +263,26 @@ setInterval(function() { // ? EXIT FULLSCREEN
     document.getElementById('slideid-display').textContent = `Aurkezpen orria: ${slideid}`;
   }
 
-  function updateVideoDisplay() { // ? acutaliza el video en la pantalla
-    if(localStorage.getItem('prevPage') === 'undefined' ){
-
-      document.getElementById('prevPage-display').textContent = `-`;
+  function updateVideoDisplay(option) { // ? acutaliza el video en la pantalla
+    if(localStorage.getItem('prevPage') === 'undefined' || localStorage.getItem('prevPage') === null) {
       
+      document.getElementById('prevPage-display').textContent = `-`;
     } else {
-      document.getElementById('prevPage-display').textContent = ` ${localStorage.getItem('prevPage')}`;
+      document.getElementById('prevPage-display').textContent = `${localStorage.getItem('prevPage')}`;
     }
 
     document.getElementById('currentPage-display').textContent = `${localStorage.getItem('currentPage')}`;
 
-    if(localStorage.getItem('nextPage') === 'undefined'){
+    if(localStorage.getItem('nextPage') === 'undefined' || localStorage.getItem('nextPage') === null){
 
       document.getElementById('nextPage-display').textContent = `-`;
       
     } else {
       document.getElementById('nextPage-display').textContent = `${localStorage.getItem('nextPage')}`;
     }
+
+    console.log('DEBUG: updateVideoDisplay runned');
+
 
   }
 
@@ -342,12 +354,22 @@ setInterval(function() { // ? EXIT FULLSCREEN
   }
 
   function reset(option){
-    if(option === 'slide'){
+    if(option === 'slide' && localStorage.getItem('Displayed') === 'ppt'){
       localStorage.setItem('slideid', '1');
       updateSlideIdDisplay();
       console.log('RESET: slideid -> 1');
-    } else if(option === 'vid'){
-        resetVideo();
+    } else if (option === 'slide' && localStorage.getItem('Displayed') === 'vid'){
+      console.log('INFO: No ppt button selected');
+    }
+    
+    if(option === 'video' && localStorage.getItem('Displayed') === 'vid'){
+        localStorage.setItem('prevPage', undefined);
+        localStorage.setItem('currentPage', '2A.1');
+        localStorage.setItem('nextPage', '2A.2');
+        updateVideoDisplay();
+        console.log('RESET: video -> - , 2A.1 , 2A.2');
+    } else if (option === 'video' && localStorage.getItem('Displayed') === 'ppt'){
+      console.log('INFO: No video button selected');
     }
   }
 
@@ -394,7 +416,7 @@ function Displayed(option) { // elegir que se va a mostrar en la pantalla
   const pptButton = document.getElementById('ppt-button');
   const vidButton = document.getElementById('vid-button');
 
-  if (option === 'ppt') {
+  if (option === 'ppt') { //! Boton de diapositivas
       pptButton.classList.remove('unselected');
       pptButton.classList.add('selected');
 
@@ -404,9 +426,11 @@ function Displayed(option) { // elegir que se va a mostrar en la pantalla
       document.getElementById('reset1').classList.remove('unabled');
       document.getElementById('reset2').classList.add('unabled');
 
-      document.getElementById('prevPage-Display').style.color = 'gray'; //! revisar, bueno hacer que uncione jajaj
-      document.getElementById('currentPage-Display').style.color = 'gray';
-      document.getElementById('nextPage-Display').style.color = 'gray';
+      document.getElementById('prevPage-display').style.color = 'gray'; 
+      document.getElementById('currentPage-display').style.color = 'gray';
+      document.getElementById('nextPage-display').style.color = 'gray';
+      
+      document.getElementById('slideid-display').style.color = '#005FCC';
       
       localStorage.setItem('Displayed', 'ppt');
       document.getElementById('vidTitle').style.color = 'gray';
@@ -414,25 +438,30 @@ function Displayed(option) { // elegir que se va a mostrar en la pantalla
       vidFullscreen.classList.add('unabled');
       vidMinimize.classList.add('unabled');
 
-      document.getElementById('slideid-display').style.color = '#005FCC';
       
-  } else if (option === 'vid') {
-    pptButton.classList.remove('selected');
-    pptButton.classList.add('unselected');
+    } else if (option === 'vid') { //! Boton de video
+      pptButton.classList.remove('selected');
+      pptButton.classList.add('unselected');
+      
+      vidButton.classList.remove('unselected');
+      vidButton.classList.add('selected');
+      
+      document.getElementById('reset1').classList.add('unabled');
+      document.getElementById('reset2').classList.remove('unabled');
+      
+      localStorage.setItem('Displayed', 'vid');
+      document.getElementById('vidTitle').style.color = 'black';
+      
+      vidFullscreen.classList.remove('unabled');
+      vidMinimize.classList.remove('unabled');
+      
+        // ? habilitar info diapositivas
 
-    vidButton.classList.remove('unselected');
-    vidButton.classList.add('selected');
-
-    document.getElementById('reset1').classList.add('unabled');
-    document.getElementById('reset2').classList.remove('unabled');
-
-    localStorage.setItem('Displayed', 'vid');
-    document.getElementById('vidTitle').style.color = 'black';
-
-    vidFullscreen.classList.remove('unabled');
-    vidMinimize.classList.remove('unabled');
-
-    document.getElementById('slideid-display').style.color = 'gray';
+      document.getElementById('prevPage-display').style.color  = '#5084be';                               
+      document.getElementById('currentPage-display').style.color  = '#005FCC';                               
+      document.getElementById('nextPage-display').style.color  = '#5084be';  
+     
+      document.getElementById('slideid-display').style.color = 'gray';
 
   }
 }
