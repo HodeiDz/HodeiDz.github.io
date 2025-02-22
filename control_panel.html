@@ -107,14 +107,17 @@
         const slideid = localStorage.getItem('slideid'); // set the current slide id in span
         document.getElementById('slideid-display').textContent = `Aurkezpen orria: ${slideid}`;
 
-        if( localStorage.getItem('prevPage') == null){
+        if(localStorage.getItem('prevPage') == 'undefined'){
             document.getElementById('prevPage-display').textContent = `-`;
+            console.log('DEBUG: prevPage is undefined, so -');
         } else {
             document.getElementById('prevPage-display').textContent = `${localStorage.getItem('prevPage')}`;
         }
 
         document.getElementById('currentPage-display').textContent = `${localStorage.getItem('currentPage')}`;
         document.getElementById('nextPage-display').textContent = `${localStorage.getItem('nextPage')}`;
+
+        console.log('DEBUG: ' + localStorage.getItem('prevPage') + ' ; '+ localStorage.getItem('currentPage') + ' ; ' + localStorage.getItem('nextPage'));
         
         localStorage.setItem('Displayed', 'ppt');
         

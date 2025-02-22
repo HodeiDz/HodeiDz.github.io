@@ -281,7 +281,7 @@ setInterval(function() { // ? EXIT FULLSCREEN
       document.getElementById('nextPage-display').textContent = `${localStorage.getItem('nextPage')}`;
     }
 
-    console.log('INFO: updateVideoDisplay runned');
+    console.log('DEBUG: updateVideoDisplay runned');
 
 
   }
@@ -354,15 +354,22 @@ setInterval(function() { // ? EXIT FULLSCREEN
   }
 
   function reset(option){
-    if(option === 'slide'){
+    if(option === 'slide' && localStorage.getItem('Displayed') === 'ppt'){
       localStorage.setItem('slideid', '1');
       updateSlideIdDisplay();
       console.log('RESET: slideid -> 1');
-    } else if(option === 'video'){
+    } else if (option === 'slide' && localStorage.getItem('Displayed') === 'vid'){
+      console.log('INFO: No ppt button selected');
+    }
+    
+    if(option === 'video' && localStorage.getItem('Displayed') === 'vid'){
         localStorage.setItem('prevPage', undefined);
         localStorage.setItem('currentPage', '2A.1');
         localStorage.setItem('nextPage', '2A.2');
         updateVideoDisplay();
+        console.log('RESET: video -> - , 2A.1 , 2A.2');
+    } else if (option === 'video' && localStorage.getItem('Displayed') === 'ppt'){
+      console.log('INFO: No video button selected');
     }
   }
 
