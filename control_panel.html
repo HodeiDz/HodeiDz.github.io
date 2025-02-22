@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" translate="no">
 <head>
     <meta charset="UTF-8">
+    <meta name="google" content="notranslate">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="Media/control_panel.svg">
     <link rel="stylesheet" href="style.css">
@@ -11,6 +12,9 @@
 
 <style>
     .container.hided {
+        display: none;
+    }
+    .hide.hide {
         display: none;
     }
 
@@ -47,7 +51,7 @@
 </style>
 
 <body>
-    <img src="Media/Hodei.png" alt="Créditos" class="credits">
+    <img src="Media/Hodei.png" alt="Créditos" id="hide" class="credits">
     
     <a href="index.html">
         <img src="Media/home.svg" alt="Inico" class="homelogin">
@@ -211,11 +215,16 @@
         </div>
         <p>funtzionamendu optimoa izateko Chrome erabili</p>
     </div>
+
+    <div id="hide" class="indexcredits">
+        <p>Hodei Dz</p>
+      </div>
 </body>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('container').classList.add('hided');
+        document.getElementById('hide').style.display = 'none';
 
         setTimeout(function() {
             document.querySelector("svg").classList.add("active");
@@ -224,6 +233,8 @@
         setTimeout(function() {
             document.querySelector(".animatedlogo").style.display = 'none';
             document.getElementById('container').classList.remove('hided');
+            document.getElementById('hide').style.display = 'block';
+
         }, 3000); //? 2.5 seconds for animation give or take and 0.5 seconds delay
 
         if (!localStorage.getItem('slideid')) {
