@@ -11,7 +11,7 @@
 </head>
 
 <style>
-    .container.hided {
+    .container.hide {
         display: none;
     }
     .hide.hide {
@@ -135,7 +135,7 @@
         </svg> <!--? the space betwen the clud d are the two delimitn areas-->
     </div>
 
-    <div class="container" id="container" style="width: fit-content;">  <!-- ! style="width: fit-content;"" -->
+    <div class="container hide" id="container" style="width: fit-content;">  <!-- ! style="width: fit-content;"" -->
         <h1>Kontrol Panela</h1>
 
         <h2 style="height: 12px; font-size: 17px;">Pantailan</h2>
@@ -226,17 +226,6 @@
         document.getElementById('container').classList.add('hided');
         document.getElementById('hide').style.display = 'none';
 
-        setTimeout(function() {
-            document.querySelector("svg").classList.add("active");
-        }, 1); 
-
-        setTimeout(function() {
-            document.querySelector(".animatedlogo").style.display = 'none';
-            document.getElementById('container').classList.remove('hided');
-            document.getElementById('hide').style.display = 'block';
-
-        }, 3000); //? 2.5 seconds for animation give or take and 0.5 seconds delay
-
         if (!localStorage.getItem('slideid')) {
             localStorage.setItem('slideid', '1');
         }
@@ -276,6 +265,20 @@
         
         document.getElementById('vidFullscreen').classList.add('unabled'); // Pantaila osoa
         document.getElementById('vidMinimize').classList.add('unabled'); // Pantaila txikitu
+
+        //! Animation 
+        
+        setTimeout(function() {
+            document.querySelector("svg").classList.add("active");
+        }, 1); 
+
+        setTimeout(function() {
+            document.querySelector(".animatedlogo").style.display = 'none';
+            document.getElementById('container').classList.remove('hide');
+            document.getElementById('hide').style.display = 'block';
+
+        }, 3000); //? 2.5 seconds for animation give or take and 0.5 seconds delay
+
         
     });    
 </script>

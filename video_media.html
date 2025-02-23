@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bideoak | 5. ZINEMALDIA</title>
+        <link rel="icon"   href="../Media/ICO_ZINE_VID.svg">
+        <link rel="stylesheet" href="../style.css">
+        <script src="video.js" defer></script>
+    </head>
+    <body>
+        <img src="../Media/Olabide.svg" alt="Logo" class="logo">
+        <img src="../Media/Hodei.png" alt="Créditos" class="credits">
+
+        <a onclick="previousVideo()">
+            <img src="../Media/arrow.svg" alt="Atrás" class="previous">
+        </a> 
+
+        <a href="../index.html">
+            <img src="../Media/home.svg" alt="Casa" class="homevideo">
+        </a> 
+
+        <a onclick="nextVideo()">
+            <img src="../Media/arrow.svg" alt="Siguiente" class="next">
+        </a>
+
+        <a href="../video.html">
+            <img src="../Media/grip.svg" alt="Lista" class="grip">
+        </a>
+        
+        <div class="container">
+            <h1>
+                <span id="title">${currentPage}</span>
+            </h1>
+
+            <div>
+            <iframe id="video" width="640" height="480" allow="autoplay" allowfullscreen></iframe>
+            </div>
+        </div>
+    </body>
+
+</html>
