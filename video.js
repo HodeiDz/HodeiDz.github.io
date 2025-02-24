@@ -58,10 +58,22 @@ window.onload = function() {
 
 };
 
-function nextVideo() {
-    
+function nextVideo() { //! Reescribir esto!
+  const currentPage = localStorage.getItem('currentPage');
+  const currentIndex = pages.indexOf(currentPage);
+  const nextIndex = (currentIndex + 1) % pages.length;
+  const nextPage = pages[nextIndex];
+  
+  localStorage.setItem('currentPage', nextPage);
+  window.location.href = 'video_media.html?videoid=' + nextPage;
 }
 
-function prevVideo() {
-
+function previousVideo() {
+  const currentPage = localStorage.getItem('currentPage');
+  const currentIndex = pages.indexOf(currentPage);
+  const prevIndex = (currentIndex - 1 + pages.length) % pages.length;
+  const prevPage = pages[prevIndex];
+  
+  localStorage.setItem('currentPage', prevPage);
+  window.location.href = 'video_media.html?videoid=' + prevPage;
 }
