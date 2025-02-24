@@ -241,7 +241,7 @@ setInterval(function() { // ? EXIT FULLSCREEN
         window.location.href = "control_panel.html";
       }
       if (tomusic === true){
-        window.location.href = "music.html";
+        window.location.href = "music_index.html";
       }
       if(tovideo === true){
         window.location.href = "video.html";

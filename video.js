@@ -41,7 +41,7 @@ window.onload = function() {
     const page = params.get('videoid');
 
     if (!page) { //! if no attribute to default
-        window.location.href = 'video_media.html?videoid=2A.1';
+        window.location.href = 'video.html?videoid=2A.1';
     }
     
     localStorage.setItem('videoid', page);
@@ -74,7 +74,7 @@ function nextVideo() { //! Reescribir esto! y sin uso
   const nextPage = pages[nextIndex];
   
   localStorage.setItem('currentPage', nextPage);
-  window.location.href = 'video_media.html?videoid=' + nextPage;
+  window.location.href = 'video.html?videoid=' + nextPage;
 }
 
 function previousVideo() { //! sin uso
@@ -84,5 +84,5 @@ function previousVideo() { //! sin uso
   const prevPage = pages[prevIndex];
   
   localStorage.setItem('currentPage', prevPage);
-  window.location.href = 'video_media.html?videoid=' + prevPage;
+  window.location.href = 'video.html?videoid=' + prevPage;
 }
