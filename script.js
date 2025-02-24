@@ -247,7 +247,9 @@ setInterval(function() { // ? EXIT FULLSCREEN
         window.location.href = "video.html";
       }
     } else {
-      alert("Pasahitza okerra");
+      // alert("Pasahitza okerra");
+      document.getElementById("wrong").style.display = "block";
+      document.getElementById("password").value = "";
     }
   }
   function checkEnter(event) { // ? Search for enter key
