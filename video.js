@@ -58,7 +58,16 @@ window.onload = function() {
 
 };
 
-function nextVideo() { //! Reescribir esto!
+function video(option) {
+  if (option == 'next') {
+    console.log('DEBUG: NEXT');
+  } else if (option == 'previous') {
+    console.log('DEBUG: PREVIOUS');
+  }
+};
+    
+
+function nextVideo() { //! Reescribir esto! y sin uso
   const currentPage = localStorage.getItem('currentPage');
   const currentIndex = pages.indexOf(currentPage);
   const nextIndex = (currentIndex + 1) % pages.length;
@@ -68,7 +77,7 @@ function nextVideo() { //! Reescribir esto!
   window.location.href = 'video_media.html?videoid=' + nextPage;
 }
 
-function previousVideo() {
+function previousVideo() { //! sin uso
   const currentPage = localStorage.getItem('currentPage');
   const currentIndex = pages.indexOf(currentPage);
   const prevIndex = (currentIndex - 1 + pages.length) % pages.length;
