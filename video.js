@@ -53,6 +53,7 @@ window.onload = function() {
     document.getElementById('title').textContent = `${titles[index]}`;
     document.getElementById('video').src = `${url[index]}`;
     document.title = titles[index] + ' | 5. Zinemaldia';
+    requestAnimationFrame(checkFullscreen)
 
 
 
@@ -82,4 +83,26 @@ function video(option) {
     displayerror('prev')
   }
 };
+
+
+//____TEST___// //!mirar!
+
+function checkFullscreen() {
+  if (localStorage.getItem('fullscreen') === 'true') {
+      console.log('Fullscreen detected');
+      
+      const iframe = document.getElementById('video');
+      if (iframe.requestFullscreen) {
+          iframe.requestFullscreen().catch(err => {
+              console.error(`Error attempting to enable fullscreen mode: ${err.message} (${err.name})`);
+          });
+      } else if (iframe.webkitRequestFullscreen) { // Chrome, Safari and Opera
+          iframe.webkitRequestFullscreen().catch(err => {
+              console.error(`Error attempting to enable fullscreen mode: ${err.message} (${err.name})`);
+          });
+      } 
+      localStorage.setItem('fullscreen', 'false');
+  }
+  requestAnimationFrame(checkFullscreen);
+}
     
