@@ -241,10 +241,10 @@ setInterval(function() { // ? EXIT FULLSCREEN
         window.location.href = "control_panel.html";
       }
       if (tomusic === true){
-        window.location.href = "music_index.html";
-      }
+        window.location.href = "music.html";
+      } 
       if(tovideo === true){
-        window.location.href = "video.html";
+        window.location.href = "video_index.html";
       }
     } else {
       // alert("Pasahitza okerra");

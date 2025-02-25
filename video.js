@@ -44,7 +44,7 @@ window.onload = function() {
         window.location.href = 'video.html?videoid=2A.1';
     } 
     
-    localStorage.setItem('videoid', page);
+    localStorage.setItem('currentPage', page);
     console.log(page);
 
     var index = pages.indexOf(page);
@@ -58,31 +58,28 @@ window.onload = function() {
 
 };
 
+
 function video(option) {
-  if (option == 'next') {
-    console.log('DEBUG: NEXT');
-  } else if (option == 'previous') {
-    console.log('DEBUG: PREVIOUS');
+  const currentIndex = pages.indexOf(localStorage.getItem('currentPage')); //! currentIndex = currentPage
+  console.log('DEBUG: Raw Index:' + currentIndex)
+
+  const nextPage = pages[currentIndex + 1]; 
+  console.log('DEBUG: nextPage: ' + nextPage);
+
+  const prevPage  = pages[currentIndex - 1]; 
+  console.log('DEBUG: prevPage: ' + prevPage);
+
+  if (option == 'next' && currentIndex < pages.length - 1) {
+
+    window.location.href= 'video.html?videoid=' + nextPage;
+
+    displayerror('next');
+
+  } else if (option == 'previous' && currentIndex > 0) {
+
+    window.location.href= 'video.html?videoid=' + prevPage;
+
+    displayerror('prev')
   }
 };
     
-
-function nextVideo() { //! Reescribir esto! y sin uso
-  const currentPage = localStorage.getItem('currentPage');
-  const currentIndex = pages.indexOf(currentPage);
-  const nextIndex = (currentIndex + 1) % pages.length;
-  const nextPage = pages[nextIndex];
-  
-  localStorage.setItem('currentPage', nextPage);
-  window.location.href = 'video.html?videoid=' + nextPage;
-}
-
-function previousVideo() { //! sin uso
-  const currentPage = localStorage.getItem('currentPage');
-  const currentIndex = pages.indexOf(currentPage);
-  const prevIndex = (currentIndex - 1 + pages.length) % pages.length;
-  const prevPage = pages[prevIndex];
-  
-  localStorage.setItem('currentPage', prevPage);
-  window.location.href = 'video.html?videoid=' + prevPage;
-}
