@@ -58,7 +58,8 @@ body {
     position: fixed;
     top: 10px;
     right: 10px;
-    height: 9%;
+    /* height: 9%; */
+    height: 65px;
     pointer-events: none;
 }
 .staticbutton {
@@ -308,4 +309,21 @@ body {
 .controlbuttons p{
     margin-left: 10px;
     margin-right: 30px;
+}
+
+.sync {
+    position: fixed;
+    top: 80px;
+    /* right: 100px; */
+    right: 37px;
+    height: 6%;   
+    cursor: pointer; 
+}
+
+.sync img.hide{
+    display: none;
+}
+
+.sync img{
+    height: 30px;
 }

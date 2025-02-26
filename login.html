@@ -6,7 +6,6 @@
     <link rel="icon" href="Media/Login.svg"/>
     <link rel="stylesheet" href="style.css"/>
     <script src="script.js" defer></script>
-    <script src="redirect.js" defer></script>
     <title>Login | 5. Zinemaldia</title>
   </head>
   <body>
@@ -22,6 +21,14 @@
         <div>
             <input type="password" id="password" placeholder="Sartu Pasahitza" onkeydown="checkEnter(event)">
         </div>
+
+        <div id="wrong" class="wrong hide" style="display: flex; align-items: center; justify-content: center; display: none;">
+            <span style="display: flex; align-items: center; "></span>
+              <img src="Media/alert_red.svg" style="height: 25px; margin-right: 5px;" alt="wrong password">
+              Pasahitza okerra
+            </span>
+        </div>
+
       <button class="button" onclick="login()">SARTU</button>
     </div>
     
@@ -33,6 +40,27 @@
       document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('password').focus();
       });
+
+      var tovideo = false;
+      var tomusic = false;
+      var tocontrol = false;
+
+      window.onload = function() {
+
+          const params = new URLSearchParams(window.location.search);
+          const page = params.get('topage');
+            if (page === 'tovideo') {
+                tovideo = true;
+            } else if (page === 'tomusic') {
+                tomusic = true;
+            }else if(page === 'tocontrol'){
+                tocontrol = true;
+            }
+            else{
+              alert("INTENAL ERROR! Attributte lost, Returning to home page...");
+              window.location.href = "index.html";
+            }
+      }
     </script>
     
   </body>

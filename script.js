@@ -242,12 +242,14 @@ setInterval(function() { // ? EXIT FULLSCREEN
       }
       if (tomusic === true){
         window.location.href = "music.html";
-      }
+      } 
       if(tovideo === true){
-        window.location.href = "video.html";
+        window.location.href = "video_index.html";
       }
     } else {
-      alert("Pasahitza okerra");
+      // alert("Pasahitza okerra");
+      document.getElementById("wrong").style.display = "block";
+      document.getElementById("password").value = "";
     }
   }
   function checkEnter(event) { // ? Search for enter key
