@@ -105,4 +105,25 @@ function checkFullscreen() {
   }
   requestAnimationFrame(checkFullscreen);
 }
+
+function checkMinimize() {
+  if (localStorage.getItem('minimize') === 'true') {
+    console.log('EXIT FULSCREEN detected');
+    
+    const iframe = document.getElementById('video');
+    if (document.exitFullscreen) {
+        document.exitFullscreen().catch(err => {
+            console.error(`Error attempting to exit fullscreen mode: ${err.message} (${err.name})`);
+        });
+    } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
+        document.webkitExitFullscreen().catch(err => {
+            console.error(`Error attempting to exit fullscreen mode: ${err.message} (${err.name})`);
+        });
+    } 
+    localStorage.setItem('minimize', 'false');
+               
+    }
+    requestAnimationFrame(checkMinimize);
+
+}
     

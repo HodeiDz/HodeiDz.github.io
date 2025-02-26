@@ -67,6 +67,13 @@
             <img src="Media/grip.svg" alt="Lista" class="grip">
         </a>
 
+        <div class="sync">
+        <a onclick="sync()">
+            <img src="Media/sync-off.svg" class="" alt="sync on">
+            <img src="Media/sync.svg" class="" alt="sync off">
+        </a>
+        </div>
+
         <div class="animatedlogo">
             <svg xmlns="http://www.w3.org/2000/svg" width="550px" viewBox="-2 0 1444 1152">
                 <path id="h" class="h" fill="black" stroke="black" stroke-width="2" 
@@ -163,6 +170,18 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('hide').style.display = 'none';
+            if(!localStorage.getItem('sync')){
+                localStorage.setItem('sync', 'on');
+            } 
+
+            if(localStorage.getItem('sync') == 'off'){
+                document.querySelector('.sync img[alt="sync on"]').classList.remove('hide');
+                document.querySelector('.sync img[alt="sync off"]').classList.add('hide');
+            }
+             if (localStorage.getItem('sync') == 'on'){
+                document.querySelector('.sync img[alt="sync on"]').classList.add('hide');
+                document.querySelector('.sync img[alt="sync off"]').classList.remove('hide');
+            }
 
             setTimeout(function() {
                 document.querySelector("svg").classList.add("active");
@@ -175,6 +194,19 @@
 
             }, 2000);
         });
+
+        function sync() {            
+            const syncOn = document.querySelector('.sync img[alt="sync on"]');
+            const syncOff = document.querySelector('.sync img[alt="sync off"]');
+
+            if(localStorage.getItem('sync') == 'on'){
+                localStorage.setItem('sync', 'off');
+            } else if (localStorage.getItem('sync') == 'off'){
+                localStorage.setItem('sync', 'on');
+            }
+            syncOn.classList.toggle('hide');
+            syncOff.classList.toggle('hide');
+        }
         
     </script>
 
