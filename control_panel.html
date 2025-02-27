@@ -11,7 +11,7 @@
 </head>
 
 <style>
-    .container.hided {
+    .container.hide {
         display: none;
     }
     .hide.hide {
@@ -58,8 +58,8 @@
     </a> 
 
     <div class="animatedlogo">
-        <svg xmlns="http://www.w3.org/2000/svg" width="550px" viewBox="0 0 1440 1152">
-            <path id="h" class="h" fill="black" stroke="black" stroke-width="1" 
+        <svg xmlns="http://www.w3.org/2000/svg" width="550px" viewBox="-2 0 1444 1152">
+            <path id="h" class="h" fill="black" stroke="black" stroke-width="2" 
                 d="M 807.08,420.00
                    C 818.36,420.00 824.00,425.37 824.00,436.09
                      824.00,436.09 824.00,905.00 824.00,905.00
@@ -79,7 +79,7 @@
                      571.00,625.00 750.00,625.00 750.00,625.00
                      750.00,625.00 750.00,420.00 750.00,420.00
                      750.00,420.00 807.08,420.00 807.08,420.00 Z" />
-            <path id="nube" class="nube" fill="black" stroke="black" stroke-width="1" 
+            <path id="nube" class="nube" fill="black" stroke="black" stroke-width="2" 
                 d="M 559.00,172.21
                    C 559.00,172.21 585.00,172.21 585.00,172.21
                      585.00,172.21 607.00,173.84 607.00,173.84
@@ -135,7 +135,7 @@
         </svg> <!--? the space betwen the clud d are the two delimitn areas-->
     </div>
 
-    <div class="container" id="container" style="width: fit-content;">  <!-- ! style="width: fit-content;"" -->
+    <div class="container hide" id="container" style="width: fit-content;">  <!-- ! style="width: fit-content;"" -->
         <h1>Kontrol Panela</h1>
 
         <h2 style="height: 12px; font-size: 17px;">Pantailan</h2>
@@ -213,7 +213,7 @@
                 <img src="Media/minimize.svg" alt="fullscreen exit">
             </button>
         </div>
-        <p>funtzionamendu optimoa izateko Chrome erabili</p>
+        <!-- <p>funtzionamendu optimoa izateko Chrome erabili</p> -->
     </div>
 
     <div id="hide" class="indexcredits">
@@ -225,17 +225,6 @@
     document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('container').classList.add('hided');
         document.getElementById('hide').style.display = 'none';
-
-        setTimeout(function() {
-            document.querySelector("svg").classList.add("active");
-        }, 1); 
-
-        setTimeout(function() {
-            document.querySelector(".animatedlogo").style.display = 'none';
-            document.getElementById('container').classList.remove('hided');
-            document.getElementById('hide').style.display = 'block';
-
-        }, 3000); //? 2.5 seconds for animation give or take and 0.5 seconds delay
 
         if (!localStorage.getItem('slideid')) {
             localStorage.setItem('slideid', '1');
@@ -276,6 +265,20 @@
         
         document.getElementById('vidFullscreen').classList.add('unabled'); // Pantaila osoa
         document.getElementById('vidMinimize').classList.add('unabled'); // Pantaila txikitu
+
+        //! Animation 
+        
+        setTimeout(function() {
+            document.querySelector("svg").classList.add("active");
+        }, 1); 
+
+        setTimeout(function() {
+            document.querySelector(".animatedlogo").style.display = 'none';
+            document.getElementById('container').classList.remove('hide');
+            document.getElementById('hide').style.display = 'block';
+
+        }, 3000); //? 2.5 seconds for animation give or take and 0.5 seconds delay
+
         
     });    
 </script>
