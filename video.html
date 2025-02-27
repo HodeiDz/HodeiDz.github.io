@@ -13,6 +13,7 @@
         .container.hide{
             display: none;
         }
+
         svg .h { /*! 2x mas rapido para no aburrir */
         stroke-dashoffset: 2446.52734375px;
         stroke-dasharray: 2446.52734375px;
@@ -67,7 +68,7 @@
             <img src="Media/grip.svg" alt="Lista" class="grip">
         </a>
 
-        <div class="sync">
+        <div class="sync" id="sync">
         <a onclick="sync()">
             <img src="Media/sync-off.svg" class="" alt="sync on">
             <img src="Media/sync.svg" class="" alt="sync off">
@@ -170,6 +171,7 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('hide').style.display = 'none';
+            document.getElementById('sync').style.display = 'none';
             if(!localStorage.getItem('sync')){
                 localStorage.setItem('sync', 'on');
             } 
@@ -191,6 +193,7 @@
                 document.querySelector(".animatedlogo").style.display = 'none';
                 document.getElementById('container').classList.remove('hide');
                 document.getElementById('hide').style.display = 'block';
+                document.getElementById('sync').style.display = 'block';
 
             }, 2000);
         });

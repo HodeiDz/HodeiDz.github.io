@@ -46,15 +46,32 @@
                 alert("INTERNAL ERROR! Attribute lost, setting default (first slide)...");
                 window.location.href = 'presentation.html?slideid=1'
             }
-        }
-        setInterval(function() { //! Check changes 
-            if(localStorage.getItem('Displayed') !== 'ppt'){
-                window.location.href = 'example.com';   
-                
-            } else {
-                console.log("DEBUG: check runned")
-            }
 
-        }, 1000);
+            requestAnimationFrame(checkDisplay);
+            requestAnimationFrame(checkPages);
+        }
+
+        function checkDisplay(){
+            // console.log('DEBUG: checkDisplay');
+        if (localStorage.getItem('sync') === 'on' && localStorage.getItem('Displayed') === 'vid') {
+            window.location.href = 'video.html?videoid=' + localStorage.getItem('videoid'); 
+        }
+        requestAnimationFrame(checkDisplay);
+        }
+
+        function checkPages() { //? sirve para next y prev
+            const params = new URLSearchParams(window.location.search);
+            const slide = params.get('slideid');
+            // console.log('DEBUG: checkNext; page: ' + page);
+
+            if (localStorage.getItem('slideid') !== slide && localStorage.getItem('sync') === 'on') {
+                console.log('next')
+
+                window.location.href = 'presentation.html?slideid=' + localStorage.getItem('slideid');
+            
+            }
+            requestAnimationFrame(checkPages);
+  
+}   
     </script>
 </html>

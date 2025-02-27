@@ -43,9 +43,15 @@ window.onload = function() {
     if (!page) { //! if no attribute to default 
         window.location.href = 'video.html?videoid=2A.1';
     } 
-    
-    localStorage.setItem('currentPage', page);
-    console.log(page);
+
+    if (localStorage.getItem('sync') === 'on' && localStorage.getItem('currentPage') !== page) { 
+        window.location.href = 'video.html?videoid=' + localStorage.getItem('currentPage');
+    }
+
+    if(localStorage.getItem('sync') === 'off') {
+      localStorage.setItem('currentPage', page);
+      console.log(page);
+    }
 
     var index = pages.indexOf(page);
     console.log('DEBUG: RAW INDEX: ' + index);
@@ -53,7 +59,12 @@ window.onload = function() {
     document.getElementById('title').textContent = `${titles[index]}`;
     document.getElementById('video').src = `${url[index]}`;
     document.title = titles[index] + ' | 5. Zinemaldia';
-    requestAnimationFrame(checkFullscreen)
+
+    requestAnimationFrame(checkFullscreen);
+    requestAnimationFrame(checkMinimize);
+    requestAnimationFrame(checkPages);
+    requestAnimationFrame(checkDisplay);
+
 
 
 
@@ -126,4 +137,25 @@ function checkMinimize() {
     requestAnimationFrame(checkMinimize);
 
 }
-    
+
+function checkPages() { //? sirve para next y prev
+  const params = new URLSearchParams(window.location.search);
+  const page = params.get('videoid');
+  // console.log('DEBUG: checkNext; page: ' + page);
+
+  if (localStorage.getItem('currentPage') !== page && localStorage.getItem('sync') === 'on') {
+    console.log('next')
+
+    window.location.href = 'video.html?videoid=' + localStorage.getItem('currentPage');
+}
+requestAnimationFrame(checkPages);
+  
+}    
+
+function checkDisplay() {
+  // console.log('DEBUG: checkDisplay');
+  if (localStorage.getItem('sync') === 'on' && localStorage.getItem('Displayed') === 'ppt') {
+    window.location.href = 'presentation.html?slideid=' + localStorage.getItem('slideid'); 
+  }
+  requestAnimationFrame(checkDisplay);
+}
