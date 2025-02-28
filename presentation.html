@@ -54,7 +54,7 @@
         function checkDisplay(){
             // console.log('DEBUG: checkDisplay');
         if (localStorage.getItem('sync') === 'on' && localStorage.getItem('Displayed') === 'vid') {
-            window.location.href = 'video.html?videoid=' + localStorage.getItem('videoid'); 
+            window.location.href = 'video.html?videoid=' + localStorage.getItem('currentPage'); 
         }
         requestAnimationFrame(checkDisplay);
         }
