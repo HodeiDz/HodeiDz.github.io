@@ -9,11 +9,20 @@
 </head>
 <body>
     <img src="Media/Olabide.svg" alt="Logo" class="logo">
-    <img src="Media/Hodei.png" alt="Créditos" class="credits">
+    <a href="credits.html?return=videoindex">
+        <img src="Media/Hodei.png" style="pointer-events: auto;" alt="Créditos" id="hide" class="credits">
+    </a>
     
     <a href="index.html">
         <img src="Media/home.svg" alt="Inico" class="home">
     </a> 
+
+    <div class="sync" id="sync">
+        <a onclick="sync()">
+            <img src="Media/sync-off.svg" class="" alt="sync on">
+            <img src="Media/sync.svg" class="" alt="sync off">
+        </a>
+        </div>
 
     <div class="container">
         <h1 style="font-size: 2rem;">5. ZINEMALDIAREN BIDEOAK</h1>
@@ -92,4 +101,34 @@
         </div>
     </div>
 </body>
+<script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+        if(!localStorage.getItem('sync')){
+                localStorage.setItem('sync', 'on');
+            } 
+
+            if(localStorage.getItem('sync') == 'off'){
+                document.querySelector('.sync img[alt="sync on"]').classList.remove('hide');
+                document.querySelector('.sync img[alt="sync off"]').classList.add('hide');
+            }
+             if (localStorage.getItem('sync') == 'on'){
+                document.querySelector('.sync img[alt="sync on"]').classList.add('hide');
+                document.querySelector('.sync img[alt="sync off"]').classList.remove('hide');
+            }
+        });
+        
+            function sync() {            
+            const syncOn = document.querySelector('.sync img[alt="sync on"]');
+            const syncOff = document.querySelector('.sync img[alt="sync off"]');
+
+            if(localStorage.getItem('sync') == 'on'){
+                localStorage.setItem('sync', 'off');
+            } else if (localStorage.getItem('sync') == 'off'){
+                localStorage.setItem('sync', 'on');
+            }
+            syncOn.classList.toggle('hide');
+            syncOff.classList.toggle('hide');
+        }
+</script>
 </html>

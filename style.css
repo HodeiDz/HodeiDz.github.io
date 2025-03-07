@@ -60,7 +60,7 @@ body {
     right: 10px;
     /* height: 9%; */
     height: 65px;
-    pointer-events: none;
+    /* pointer-events: none; */
 }
 .staticbutton {
     background-color: #0083FF;
